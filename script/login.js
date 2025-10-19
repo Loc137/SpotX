@@ -27,7 +27,9 @@ const handleLogin = function(event) {
         };
 
         localStorage.setItem('user_session', JSON.stringify(userSession));
+
         alert("Đăng nhập thành công!");
+        
         window.location.href = './home.html';
     })
     .catch(e =>{

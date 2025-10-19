@@ -13,7 +13,6 @@ export function addTrack(name, image, artist, trackId, release_date, duration, l
         alert("The song is already in the playlist!");
         return;
     }
-
     playlist.push(track);
     localStorage.setItem(key, JSON.stringify(playlist));
     alert("Song added to playlist!");

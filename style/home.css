@@ -5,6 +5,13 @@
     font-weight: 600;
 }
 
+.carousel img {
+    height: 500px;
+    object-fit: cover;
+    text-align: center;
+}
+
+
 .logo {
     width: 50px;
 }
