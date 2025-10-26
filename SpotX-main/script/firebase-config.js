@@ -7,13 +7,13 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAL6fs6Mv1Dd9q3nG7uRrhqPcOwDLzUmI8",
-  authDomain: "coffe-class.firebaseapp.com",
-  projectId: "coffe-class",
-  storageBucket: "coffe-class.firebasestorage.app",
-  messagingSenderId: "432949432022",
-  appId: "1:432949432022:web:a2ab3a4a4b20db503e8377",
-  measurementId: "G-CVM9YKXMZ3"
+  apiKey: "AIzaSyCnXprcfFk6IMhUIpnmYrMEXsZ9cklW60c",
+  authDomain: "spot-x-46d47.firebaseapp.com",
+  projectId: "spot-x-46d47",
+  storageBucket: "spot-x-46d47.firebasestorage.app",
+  messagingSenderId: "110427984173",
+  appId: "1:110427984173:web:beae92a43162fae05343a4",
+  measurementId: "G-46ZDX9MSRD"
 };
 
 // Initialize Firebase

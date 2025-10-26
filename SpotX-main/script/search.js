@@ -1,13 +1,11 @@
 import { getToken } from "./getToken.js";
-import { formatDuration, showModalDetails_track, showModalDetails_artist, showModalMore_track, closeModal, showModalMore_artist } from "./show_modal.js";
-import { addTrack } from "./CRUD.js";
+import { formatDuration, showModalDetails_track, showModalDetails_artist, closeModal } from "./show_modal.js";
 
 window.showModalDetails_track = showModalDetails_track
 window.showModalDetails_artist = showModalDetails_artist
-window.showModalMore_track = showModalMore_track
-window.showModalMore_artist = showModalMore_artist
+// window.showModalMore_track = showModalMore_track
+// window.showModalMore_artist = showModalMore_artist
 window.closeModal = closeModal
-window.addTrack = addTrack
 
 //show username
 
@@ -147,5 +145,5 @@ document
     }
   });
 
-document.querySelector(".showMore_track").addEventListener("click", () => { showModalMore_track(query); });
-document.querySelector(".showMore_artist").addEventListener("click", () => { showModalMore_artist(query); });
+// document.querySelector(".showMore_track").addEventListener("click", () => { showModalMore_track(query); });
+// document.querySelector(".showMore_artist").addEventListener("click", () => { showModalMore_artist(query); });

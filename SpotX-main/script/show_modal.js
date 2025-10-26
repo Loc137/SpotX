@@ -118,9 +118,9 @@ async function openPlaylistSelector(track) {
     </div>
     <div class="playlist-create">
       <input type="text" id="newPlaylistName" placeholder="Nhập tên playlist mới..." />
-      <button id="createPlaylistBtn" class="btn-create">Tạo playlist mới</button>
+      <button id="createPlaylistBtn" class="btn-create" style = "border: 1px solid white; ">Tạo playlist mới</button>
     </div>
-    <button id="closePlaylistModal" class="btn-close">Đóng</button>
+    <button id="closePlaylistModal" class="btn-close" style="margin-right: 30px;">Đóng</button>
   </div>
 `;
 
@@ -139,7 +139,7 @@ async function openPlaylistSelector(track) {
     alignItems: "center",
     zIndex: 9999,
   });
-  Object.assign(modal.querySelector(".playlist-box").style, {
+  Object.assign(modal.querySelector(".playlist-popup").style, {
     background: "#121212",
     color: "#fff",
     padding: "25px",
