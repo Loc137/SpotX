@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+        const employees = [
+            { name: "John", salary: 50000, department: "IT" },
+            { name: "Jane", salary: 60000, department: "HR" },
+            { name: "Bob", salary: 55000, department: "IT" },
+            { name: "Sophie", salary: 75000, department: "HR" },
+            { name: "Mike", salary: 65000, department: "IT" },
+            { name: "Emily", salary: 80000, department: "HR" },
+            { name: "David", salary: 70000, department: "IT" },
+        ]
+
+        function averageIT(employees){
+            let total = 0
+            let count = 0
+            for (let i = 0; i < employees.length; i++){
+                if (employees[i].department == "IT"){
+                    total += employees[i].salary
+                    count += 1
+                }
+            }
+            return total / count
+        }
+
+        function averageIt(employees){
+            let total = 0
+            let count = 0
+            for (let i = 0; i < employees.length; i++){
+                if (employees[i].department == "IT"){
+                    total += employees[i].salary
+                    count += 1
+                }
+            }
+            return (total / count).toFixed(0)
+        }
+
+        function averageHR(employees){
+            let total = 0
+            let count = 0
+            for (let i = 0; i < employees.length; i++){
+                if (employees[i].department == "HR"){
+                    total += employees[i].salary
+                    count += 1
+                }
+            }
+            return (total / count).toFixed(0)
+        }
+
+        console.log(`Mức lương trung bình của bộ phận IT: ${averageIT(employees)}`)
+        console.log(`Mức lương trung bình của bộ phận HR: ${averageHR(employees)}`)
+
+        let result = []
+
+        if (averageIT(employees) > 65000){
+            result.push({average_salary: averageIT(employees), department: 'IT'})
+        }
+
+        if (averageHR(employees) > 65000){
+            result.push({average_salary: averageHR(employees), department: 'HR'})
+        }
+
+        console.log(`Các phòng ban có mức lương trung bình trên 65000: `)
+        console.log(result)
+
+
+    </script>
+</body>
+
+</html>

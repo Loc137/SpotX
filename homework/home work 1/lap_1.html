@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lap 1</title>
+</head>
+
+<body>
+
+    <script>
+        function countTrue(array) {
+            let total = 0
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] === true) {
+                    total += 1;
+                }
+            }
+            return total
+        }
+
+        console.log(countTrue([true, false, false, true, false]))
+        console.log(countTrue([false, false, false, false]))
+        console.log(countTrue([]))
+
+        //cach 2
+        // function countTrue_2(array) {
+        //     let result = array.filter(item => item === true).length
+        //     return result
+        // }
+
+        // console.log(countTrue_2([true, false, false, true, false]))
+        // console.log(countTrue_2([false, false, false, false]))
+        // console.log(countTrue_2([]))
+
+    </script>
+</body>
+
+</html>

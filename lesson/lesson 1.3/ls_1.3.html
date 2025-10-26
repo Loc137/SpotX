@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            background-color: white;
+            font-weight: 600;
+            font-family: poppins;
+        }
+
+        #query {
+            border-radius: 10px;
+            width: 30%;
+            height: 35px;
+            border: solid 2px black;
+            padding-left: 15px;
+        }
+
+        #searchButton {
+            padding: 10px 20px;
+            border: none;
+            border: 2px solid black;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+
+        .stat {
+            border-radius: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .error_content {
+            text-align: center;
+        }
+
+        .stat_row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <input type="text" id="query" placeholder="Search">
+        <button id="searchButton">Search</button>
+    </div>
+
+    <div class="container">
+    </div>
+
+    <div class="error_container">
+
+    </div>
+
+    <script>
+
+        function search() {
+
+            const query = document.getElementById('query').value.trim()
+
+            const container = document.querySelector(".container")
+            const error_container = document.querySelector(".error_container")
+
+            container.innerHTML = ``
+            error_container.innerHTML = ``
+
+            if (!query) {
+                error_container.innerHTML = `
+                    <div class="error_content">
+                        <img src="./search.png" alt="img" style="width:50px;">
+                        <h2>Please enter a pokemon name!</h2>
+                    </div>
+                `
+                return
+            }
+
+            fetch(`https://pokeapi.co/api/v2/pokemon/${query}/`)
+                .then(response => response.json())
+                .then(data => {
+
+                    const name = data.name
+                    const image = data.sprites.front_default
+                    const type = data.types[0].type.name
+                    const height = data.height
+                    const weight = data.weight
+                    console.log(data)
+
+                    container.innerHTML = `
+                        <img src="${image}" alt="img" style="width: 300px; margin: 0;">
+                        <h2 style="color: black;">Base Stats</h3>
+                        <div class="stat_row"> 
+                            <p class="stat" style="background-color: lightgreen;">Name: ${name}</p>
+                            <p class="stat" style="background-color: lightsalmon;">Type: ${type}</p>
+                            <p class="stat" style="background-color: lightskyblue;">Height: ${(height * 0.1).toFixed(1)}m</p>
+                            <p class="stat" style="background-color: lightpink;">Weight: ${(weight * 0.1).toFixed(1)}kg</p>
+                        </div>
+                    `
+
+
+                })
+                .catch(error => {
+                    error_container.innerHTML = `
+                        <div class="error_content">
+                            <img src="./search.png" alt="img" style="width:50px;">
+                            <h2>Pokemon not found!</h2>
+                        </div>
+                    `
+                })
+        }
+
+        document.getElementById("searchButton").addEventListener("click", search)
+
+    </script>
+</body>
+
+</html>

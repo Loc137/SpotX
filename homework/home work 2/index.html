@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+        let cargoHold = [
+            'oxygen tanks',
+            'space suits',
+            'parrot',
+            'instruction manual',
+            'meal packs',
+            'slinky',
+            'security blanket'
+        ]
+
+        //yeu cau 1
+        cargoHold.shift()
+        cargoHold.splice(0, 0, 'space tether')
+        console.log(cargoHold)
+
+        //yeu cau 2
+        let theLastRemove = cargoHold.pop()
+        cargoHold.pop
+        console.log(theLastRemove)
+        console.log(cargoHold)
+
+        //yeu cau 3
+        let theFirstRemove = cargoHold.shift()
+        cargoHold.shift()
+        console.log(theFirstRemove)
+        console.log(cargoHold)
+
+        //yeu cau 4
+        cargoHold.splice(0, 0, '1138')
+        cargoHold.push('20 meters')
+        console.log(`Mảng cuối cùng: ${cargoHold}, chiều dài mảng: ${cargoHold.length}`)
+
+
+    </script>
+</body>
+
+</html>

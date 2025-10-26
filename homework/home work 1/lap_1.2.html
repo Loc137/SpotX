@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forcast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: Poppins;
+            background-color: rgb(135, 206, 235);
+            display: flex;
+            justify-content: center;
+        }
+
+        input {
+            border-radius: 10px;
+            height: 30px;
+            border: solid 2px black;
+        }
+
+        .container {
+            background-color: white !important;
+            margin-top: 200px;
+            border: solid 2px none;
+            border-radius: 10px;
+            padding: 20px 20px 20px 20px;
+            text-align: center;
+            width: 400px;
+        }
+
+        #searchButton {
+            padding: 10px 20px;
+            border: none;
+            background-color: rgb(135, 206, 235);
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Weather APP</h1>
+        <input type="text" placeholder="Enter a city" id="query"> <br> <br>
+        <button id="searchButton">Search</button>
+        <div class="result_container"></div>
+        <div class="error_container"></div>
+    </div>
+
+    <script>
+
+        const apiKey = `fce8490c62b51419e1db7d889c8d550b`
+
+        function currentWeather() {
+            const query = document.getElementById("query").value.trim()
+            const result_container = document.querySelector(".result_container")
+            const error_container = document.querySelector(".error_container")
+
+            result_container.innerHTML = ""
+            error_container.innerHTML = ""
+
+            if (!query) {
+                error_container.innerHTML = `
+                    <div>
+                        <img src="./search.png" alt="img" style="width:50px;">
+                        <h2>Please enter a city name!</h2>
+                    </div>
+                `
+                return
+            }
+
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=metric`
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+
+                    const name = data.name
+                    const image = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+                    const temperature = data.main.temp
+                    const description = data.weather[0].description
+                    const humidity = data.main.humidity
+                    const windSpeed = data.wind.speed
+
+                    result_container.innerHTML = `
+                        <div>
+                            <h1>${name}</h1>
+                            <img src="${image}" alt="Weather icon">
+                            <p>Temperature: ${temperature}°C</p>
+                            <p>Description: ${description}</p>
+                            <p>Humidity: ${humidity}%</p>
+                            <p>Wind speed: ${windSpeed} m/s</p>
+                        </div>
+                    `
+                })
+                .catch(error => {
+                    error_container.innerHTML = `
+                        <div>
+                            <img src="./search.png" alt="img" style="width:50px;">
+                            <h2>City not found!</h2>
+                        </div>
+                    `
+                })
+        }
+
+        document.getElementById("searchButton").addEventListener("click", currentWeather)
+
+
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>
