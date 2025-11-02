@@ -3,7 +3,6 @@ import { getUserPlaylists, createPlaylist, addTrackToPlaylist } from "./CRUD.js"
 
 window.showModalDetails_track = showModalDetails_track;
 window.showModalDetails_artist = showModalDetails_artist;
-//window.showModalMore_track = showModalMore_track;
 window.closeModal = closeModal;
 
 // =================== HÀM ĐỊNH DẠNG THỜI GIAN ===================
@@ -35,7 +34,9 @@ export async function showModalDetails_track(trackId) {
   const modal_box = document.createElement("div");
   modal_box.className = "modal_box";
   modal_box.innerHTML = `
-    <i class="fa-solid fa-arrow-left fa-2xl" style="color:#fff;" onclick="closeModal()" id="arrow_icon"></i>
+    <button id="backBtn" onclick="closeModal()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;">
+        <i class="fa-solid fa-arrow-left"></i> Go back
+    </button>
     <div class="modal_content">
       <div class="iframe_embed">
         <iframe src="${embed}" width="80%" height="375" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
@@ -108,7 +109,7 @@ async function openPlaylistSelector(track) {
   modal.className = "playlist-modal";
   modal.innerHTML = `
   <div class="playlist-popup">
-    <h3 class="popup-title">🎧 Chọn playlist</h3>
+    <h3 class="popup-title">🎧 Select playlist</h3>
     <div class="playlist-list">
       ${
         playlists.length > 0
@@ -118,7 +119,7 @@ async function openPlaylistSelector(track) {
     </div>
     <div class="playlist-create">
       <input type="text" id="newPlaylistName" placeholder="Nhập tên playlist mới..." />
-      <button id="createPlaylistBtn" class="btn-create" style = "border: 1px solid white; ">Tạo playlist mới</button>
+      <button id="createPlaylistBtn" class="btn-create" style="border: 1px solid white;">Tạo playlist mới</button>
     </div>
     <button id="closePlaylistModal" class="btn-close" style="margin-right: 30px;">Đóng</button>
   </div>
@@ -158,22 +159,24 @@ async function openPlaylistSelector(track) {
   });
 
   // Nút tạo mới
- document.getElementById("createPlaylistBtn").addEventListener("click", async () => {
-  const name = document.getElementById("newPlaylistName").value.trim();
-  if (!name) return alert("Nhập tên playlist!");
+  document.getElementById("createPlaylistBtn").addEventListener("click", async () => {
+    const name = document.getElementById("newPlaylistName").value.trim();
+    if (!name) return alert("Enter playlist name!");
 
-  const created = await createPlaylist(name); // ✅ kiểm tra kết quả
-  if (created) {
-    await addTrackToPlaylist(name, track);
-    document.body.removeChild(modal);
-  }
-});
+    const created = await createPlaylist(name);
+    if (created) {
+      await addTrackToPlaylist(name, track);
+      document.body.removeChild(modal);
+    }
+  });
 
   // Nút đóng
   document.getElementById("closePlaylistModal").addEventListener("click", () => {
     document.body.removeChild(modal);
   });
 }
+
+window.openPlaylistSelector = openPlaylistSelector;
 
 // =================== MODAL NGHỆ SĨ ===================
 export async function showModalDetails_artist(artistId) {
@@ -191,7 +194,9 @@ export async function showModalDetails_artist(artistId) {
   const modal_box = document.createElement("div");
   modal_box.className = "modal_box";
   modal_box.innerHTML = `
-    <i class="fa-solid fa-arrow-left fa-2xl" style="color:#fff;" onclick="closeModal()" id="arrow_icon"></i>
+    <button id="backBtn" onclick="closeModal()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;">
+        <i class="fa-solid fa-arrow-left"></i> Go back
+    </button>
     <div class="modal_content">
       <div class="iframe_embed">
         <iframe src="${embed}" width="80%" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
@@ -222,7 +227,6 @@ export async function showModalDetails_artist(artistId) {
     `;
   });
 }
-window.openPlaylistSelector = openPlaylistSelector;
 
 // =================== ĐÓNG MODAL ===================
 export async function closeModal() {

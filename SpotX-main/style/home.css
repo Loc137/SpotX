@@ -140,7 +140,7 @@
     overflow-y: auto;
 }
 
-.modal_box #arrow_icon {
+.modal_box #backBtn {
     cursor: pointer;
     position: absolute;
     top: 30px;

@@ -28,32 +28,32 @@ export async function getUserPlaylists() {
 export async function createPlaylist(playlistName) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
-    alert("Bạn cần đăng nhập!");
+    alert("You need to log in!");
     return false;
   }
 
   if (!playlistName.trim()) {
-    alert("Vui lòng nhập tên playlist!");
+    alert("Please enter playlist name!");
     return false;
   }
 
   const playlistRef = doc(db, "playlists", currentUser.email, "user_playlists", playlistName);
   const existing = await getDoc(playlistRef);
   if (existing.exists()) {
-    alert("Playlist này đã tồn tại!");
+    alert("This playlist already exists!");
     return false;
   }
 
   await setDoc(playlistRef, { createdAt: new Date() });
-  alert(`🎶 Đã tạo playlist "${playlistName}"`);
-  return true; // Thêm dòng này để báo thành công
+  alert(`🎶 Playlist created "${playlistName}"`);
+  return true;
 }
 
 // Thêm bài hát vào playlist cụ thể
 export async function addTrackToPlaylist(playlistName, track) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
-    alert("Bạn cần đăng nhập!");
+    alert("You need to log in!");
     return;
   }
 
@@ -74,7 +74,7 @@ export async function addTrackToPlaylist(playlistName, track) {
   }
 
   await setDoc(trackRef, track);
-  alert(`✅ Đã thêm bài hát vào playlist "${playlistName}"!`);
+  alert(`✅ Song added to playlist "${playlistName}"!`);
 }
 
 // Lấy danh sách bài hát trong playlist cụ thể
@@ -97,7 +97,7 @@ export async function getTracksInPlaylist(playlistName) {
   return tracks;
 }
 
-// Xóa bài hát khỏi playlist cụ thể
+// Xóa bài hát khỏi playlist cụ thể ✅
 export async function deleteTrackInPlaylist(playlistName, trackId) {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) return;
@@ -113,8 +113,15 @@ export async function deleteTrackInPlaylist(playlistName, trackId) {
   );
 
   try {
+    const confirmDelete = confirm("Are you sure you want to remove this song from your playlist?");
+    if (!confirmDelete) return;
+
     await deleteDoc(trackRef);
-    alert(`🗑️ Đã xóa bài hát khỏi playlist "${playlistName}"!`);
+    alert(`🗑️ Song removed from playlist "${playlistName}"!`);
+
+    // Xóa trực tiếp khỏi giao diện nếu có phần tử chứa track đó
+    const trackCard = document.querySelector(`[data-track-id="${trackId}"]`);
+    if (trackCard) trackCard.remove();
   } catch (error) {
     console.error("Lỗi khi xóa bài hát:", error);
   }
